@@ -3,319 +3,271 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#e9dfc9">
+<meta name="theme-color" content="#0a0a0a">
+<title>胡珺玥 · Portfolio</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Playfair+Display:wght@500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap');
 
-  :root {
-    --paper: #eee4cf;
-    --paper-light: #f7f0e2;
-    --ink: #24251f;
-    --muted: #6c695d;
-    --olive: #353b30;
-    --olive-light: #4a5143;
-    --rust: #a45f42;
-    --line: rgba(40, 39, 31, .22);
-    --shadow: 0 12px 28px rgba(0,0,0,.20);
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; scroll-padding-top: 90px; }
   body {
-    margin: 0;
-    color: var(--ink);
-    background:
-      radial-gradient(ellipse at 20% 10%, rgba(255,255,255,.06), transparent 35%),
-      repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, transparent 1px 4px),
-      #262822;
-    font-family: "Noto Serif SC", Georgia, serif;
-    line-height: 1.75;
+    background-color: #0a0a0a; /* 深黑底色 */
+    color: #eaeaea; /* 浅灰白字体 */
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
-  a { color: inherit; text-decoration: none; }
-  button, a { -webkit-tap-highlight-color: transparent; }
-  button { font: inherit; }
 
-  .site-wrap { width: min(1180px, calc(100% - 32px)); margin: 28px auto; }
-  .paper {
-    position: relative;
-    background-color: var(--paper);
-    background-image:
-      radial-gradient(ellipse at 15% 20%, rgba(150,115,70,.07), transparent 30%),
-      radial-gradient(ellipse at 80% 75%, rgba(150,115,70,.06), transparent 28%),
-      repeating-linear-gradient(90deg, rgba(90,70,40,.018) 0 1px, transparent 1px 5px);
-    box-shadow: var(--shadow);
+  /* === 核心添加：Joji / The Weeknd 那种胶片颗粒质感 === */
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; /* 不影响鼠标操作 */
+    z-index: 9999;
+    opacity: 0.04; /* 极其微弱，但质感瞬间拉满 */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
-  .paper::after {
-    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .25;
-    background: repeating-linear-gradient(175deg, transparent 0 8px, rgba(80,65,40,.035) 9px, transparent 10px 18px);
-    mix-blend-mode: multiply;
-  }
-  .torn { clip-path: polygon(0 1%, 4% 0, 9% 1.2%, 14% 0, 21% 1%, 28% 0, 36% 1%, 44% 0, 52% 1%, 61% 0, 69% 1%, 78% 0, 86% 1%, 94% 0, 100% 1%, 99.5% 13%, 100% 24%, 99% 38%, 100% 51%, 99.5% 65%, 100% 79%, 99% 91%, 100% 99%, 91% 100%, 82% 99%, 72% 100%, 61% 99%, 49% 100%, 37% 99%, 26% 100%, 16% 99%, 7% 100%, 0 99%, .5% 88%, 0 76%, .8% 63%, 0 50%, .5% 36%, 0 22%); }
-  .tape {
-    position: absolute; z-index: 2; width: 92px; height: 24px;
-    background: rgba(184,167,126,.58); box-shadow: 0 2px 4px rgba(0,0,0,.08);
-    transform: rotate(-7deg); top: -8px; left: 30px;
-  }
-  .tape.right { left: auto; right: 30px; transform: rotate(8deg); }
-  .eyebrow { font: 11px "DM Mono", monospace; letter-spacing: .16em; text-transform: uppercase; color: var(--rust); }
-  .section-title { display:flex; align-items: baseline; gap: 12px; margin: 0 0 22px; font-size: clamp(27px, 4vw, 42px); line-height: 1.15; }
-  .section-title span { font-size: 14px; font-weight: 400; color: var(--muted); }
-  .star { display:inline-block; font-size: 24px; transform: rotate(-12deg); }
 
-  /* Navigation */
-  .nav {
-    display:flex; align-items:center; justify-content:space-between; gap: 18px;
-    padding: 18px clamp(20px, 5vw, 58px); background: var(--paper-light);
-    border-bottom: 1px dashed var(--line); position: sticky; top: 0; z-index: 20;
+  a { color: inherit; text-decoration: none; transition: all 0.4s ease; }
+  html { scroll-behavior: smooth; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 3rem; }
+
+  /* 顶部导航 */
+  nav {
+    position: fixed; top: 0; left: 0; width: 100%;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 2.5rem 3rem; z-index: 100;
+    mix-blend-mode: difference;
   }
-  .brand { font-size: 15px; font-weight: 700; letter-spacing: .06em; white-space: nowrap; }
-  .brand small { display:block; color:var(--muted); font: 10px "DM Mono", monospace; letter-spacing:.12em; }
-  .nav-links { display:flex; gap: clamp(12px, 3vw, 30px); flex-wrap: wrap; justify-content:flex-end; }
-  .nav-links a { font-size: 13px; position:relative; padding: 4px 0; }
-  .nav-links a::after { content:""; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--rust); transition:width .25s; }
-  .nav-links a:hover::after, .nav-links a:focus-visible::after { width:100%; }
+  nav .logo { font-size: 1rem; font-weight: 500; letter-spacing: 0.1em; color: #fff; }
+  .nav-links { display: flex; gap: 3rem; }
+  .nav-links a { font-size: 0.8rem; font-weight: 400; color: #fff; letter-spacing: 0.08em; opacity: 0.7; }
+  .nav-links a:hover { opacity: 1; }
 
-  /* Hero */
-  .hero { display:grid; grid-template-columns: .9fr 1.1fr; gap: clamp(24px, 5vw, 62px); padding: clamp(30px, 6vw, 70px); align-items:center; }
-  .photo-frame {
-    position:relative; background:#fbf5e8; padding: 12px 12px 42px; box-shadow: 4px 8px 18px rgba(0,0,0,.2);
-    transform: rotate(-3deg); transition: transform .35s ease, box-shadow .35s ease;
-    max-width: 390px; justify-self:center; width:100%;
+  /* Hero 首屏 */
+  .hero {
+    height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    padding-top: 100px;
   }
-  .photo-frame:hover { transform: rotate(0deg) translateY(-7px); box-shadow: 8px 18px 28px rgba(0,0,0,.24); }
-  .photo-frame img { display:block; width:100%; aspect-ratio: 4/4.5; object-fit:cover; background:#d6c8ad; }
-  .photo-caption { position:absolute; left:0; right:0; bottom:7px; text-align:center; font-style:italic; font-size:17px; }
-  .photo-frame .tape { left:38%; top:-10px; width:86px; }
-  .hero-copy { position:relative; }
-  .hero-copy h1 { margin: 4px 0 12px; font-size:clamp(42px, 7vw, 78px); line-height:1.05; letter-spacing:-.04em; }
-  .hero-copy h1 em { display:block; font-style:normal; text-decoration: underline; text-decoration-color:var(--rust); text-decoration-thickness:2px; text-underline-offset:9px; }
-  .hero-subtitle { margin: 22px 0 10px; font-size:16px; }
-  .hero-note { color:var(--muted); margin:0 0 22px; }
-  .contact-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px 18px; margin-top:22px; font-size:13px; }
-  .contact-list a { overflow-wrap:anywhere; border-bottom:1px dotted transparent; width:fit-content; transition:color .2s,border-color .2s; }
-  .contact-list a:hover { color:var(--rust); border-color:var(--rust); }
-  .contact-icon { display:inline-block; width:22px; color:var(--rust); }
-  .hand-note { position:absolute; right:0; bottom:-42px; font-style:italic; font-size:15px; transform:rotate(-7deg); color:var(--rust); }
+  .hero-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 500; line-height: 1.05; letter-spacing: -0.03em;
+    margin-bottom: 2.5rem; color: #ffffff;
+  }
+  .hero-text h1 em { font-style: italic; color: #ff2a7a; /* 亮粉色 */ }
+  .hero-text p { font-size: 1rem; color: #888; max-width: 450px; font-weight: 300; }
+  
+  /* 右侧留白/照片区 */
+  .hero-visual {
+    height: 75vh;
+    background-color: #141414;
+    background-image: radial-gradient(circle at 70% 20%, rgba(255, 42, 122, 0.08) 0%, transparent 60%);
+    display: flex; justify-content: center; align-items: center;
+    position: relative; overflow: hidden;
+  }
+  .hero-visual::after {
+    content: 'PORTRAIT / 2026';
+    font-size: 0.7rem; letter-spacing: 0.3em; color: #444; text-transform: uppercase;
+  }
 
-  /* About + skills */
-  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:26px; }
-  .about, .skills { padding:clamp(25px, 4vw, 42px); min-width:0; }
-  .about { transform:rotate(-.3deg); }
-  .about p { font-size:14px; color:#45443b; }
-  .info-list { display:grid; gap:16px; margin-top:24px; }
-  .info-item { display:grid; grid-template-columns:30px 1fr; gap:10px; font-size:13px; }
-  .info-item strong { display:block; font-size:14px; }
-  .info-symbol { font-size:21px; line-height:1.3; }
-  .skills { color:#f1e8d6; background-color:var(--olive); background-image:repeating-linear-gradient(0deg, transparent 0 7px, rgba(255,255,255,.018) 8px); transform:rotate(.25deg); }
-  .skills .section-title span, .skills .eyebrow { color:#c9bea4; }
-  .skill-group { display:grid; grid-template-columns:42px 1fr; gap:12px; padding:12px 0; border-bottom:1px dashed rgba(255,255,255,.18); }
-  .skill-group:last-child { border-bottom:0; }
-  .skill-icon { width:36px; height:36px; display:grid; place-items:center; border:1px solid #c9bea4; border-radius:9px; font-size:17px; }
-  .skill-group h3 { margin:0 0 7px; font-size:14px; font-weight:500; }
-  .tags { display:flex; flex-wrap:wrap; gap:7px; }
-  .tag { display:inline-block; border:1px solid rgba(255,255,255,.32); border-radius:99px; padding:2px 10px; font:11px "DM Mono", monospace; color:#f0e6d3; transition:all .2s ease; }
-  .tag:hover { color:var(--olive); background:#e7dac0; transform:translateY(-2px) rotate(-2deg); }
+  /* 章节通用 */
+  section { padding: 10rem 0; }
+  .section-title {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em;
+    color: #ff2a7a; /* 粉色标题 */
+    margin-bottom: 5rem; display: block; font-weight: 500;
+  }
 
-  /* Projects */
-  .projects { margin-top:28px; padding:clamp(25px, 4vw, 44px); }
-  .projects-heading { display:flex; align-items:center; justify-content:space-between; gap:20px; }
-  .view-all { border-bottom:1px solid var(--ink); font-style:italic; font-size:13px; white-space:nowrap; transition:color .2s; }
-  .view-all:hover { color:var(--rust); }
-  .project-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
+  /* 实习经历 */
+  .experience-item {
+    display: grid; grid-template-columns: 1fr 2fr; gap: 5rem;
+    padding: 5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .experience-item:last-child { border-bottom: none; }
+  .experience-date { font-size: 0.8rem; color: #666; letter-spacing: 0.05em; padding-top: 8px; }
+  .experience-content h3 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 500; margin-bottom: 0.5rem; color: #fff; }
+  .experience-content h4 { font-size: 0.9rem; color: #ff2a7a; font-weight: 400; margin-bottom: 2.5rem; letter-spacing: 0.05em; }
+  .experience-content ul { list-style: none; }
+  .experience-content li {
+    position: relative; padding-left: 2rem; margin-bottom: 1.2rem;
+    font-size: 0.95rem; color: #aaa; line-height: 1.9;
+  }
+  .experience-content li::before {
+    content: '—'; position: absolute; left: 0; color: #ff2a7a; opacity: 0.8;
+  }
+
+  /* 项目卡片 */
+  .projects-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
   .project-card {
-    background:rgba(255,250,239,.68); border:1px solid rgba(90,70,40,.17);
-    box-shadow:0 4px 8px rgba(0,0,0,.08); transition:transform .28s, box-shadow .28s;
-    overflow:hidden; position:relative;
+    padding: 3rem; border: 1px solid rgba(255,255,255,0.06);
+    transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
-  .project-card:nth-child(2) { transform:rotate(.6deg); }
-  .project-card:nth-child(3) { transform:rotate(-.5deg); }
-  .project-card:hover { transform:translateY(-8px) rotate(0); box-shadow:0 16px 25px rgba(0,0,0,.17); }
-  .project-image { height:180px; overflow:hidden; background:#d3c4a6; position:relative; }
-  .project-image img { width:100%; height:100%; display:block; object-fit:cover; transition:transform .5s; }
-  .project-card:hover .project-image img { transform:scale(1.06); }
-  .image-fallback { position:absolute; inset:0; display:grid; place-items:center; color:#514b3e; font:12px "DM Mono",monospace; text-align:center; padding:12px; background:linear-gradient(135deg,#c9b99b,#e6dac1); }
-  .project-body { padding:17px 17px 20px; }
-  .project-body h3 { font-size:17px; line-height:1.4; margin:0 0 9px; }
-  .project-body p { font-size:12px; line-height:1.85; color:#5d594d; margin:12px 0; }
-  .project-body .tag { color:#4d4a3e; border-color:#bcb29d; }
-  .project-body .tag:hover { color:#fff; background:var(--olive); }
-  .project-meta { font:10px "DM Mono",monospace; color:#8b806b; margin-top:12px; }
-  .project-link { display:inline-block; margin-top:8px; font-size:12px; border-bottom:1px solid var(--rust); color:var(--rust); }
-  .project-link:hover { letter-spacing:.04em; }
+  .project-card:hover { border-color: #ff2a7a; background: rgba(255,255,255,0.02); transform: translateY(-4px); }
+  .project-card h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 500; margin-bottom: 1rem; color: #fff; }
+  .project-card p { color: #999; max-width: 800px; font-size: 0.95rem; line-height: 1.9; }
+  .project-meta { font-size: 0.75rem; color: #555; margin-top: 2rem; letter-spacing: 0.08em; }
 
-  /* Footer */
-  .footer { color:#eee4cf; padding:35px 20px 18px; text-align:center; }
-  .footer-quote { font-size:clamp(20px, 3vw, 30px); font-style:italic; margin:0 0 12px; }
-  .footer-links { display:flex; justify-content:center; gap:22px; font-size:13px; }
-  .footer-links a { transition:color .2s, transform .2s; }
-  .footer-links a:hover { color:#d5a17f; transform:translateY(-2px); }
-  .copyright { color:#aaa795; font:10px "DM Mono",monospace; margin-top:25px; }
+  /* 信息面板 */
+  .info-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem; }
+  .info-item h4 { font-size: 0.7rem; text-transform: uppercase; color: #ff2a7a; margin-bottom: 1.5rem; letter-spacing: 0.2em; font-weight: 500; }
+  .info-item p, .info-item ul { font-size: 0.9rem; color: #888; line-height: 2; list-style: none; }
 
-  .reveal { opacity:0; transform:translateY(18px); transition:opacity .65s ease, transform .65s ease; }
-  .reveal.visible { opacity:1; transform:translateY(0); }
-  .back-top { position:fixed; right:20px; bottom:20px; z-index:30; border:0; border-radius:50%; width:42px; height:42px; cursor:pointer; background:var(--paper); color:var(--ink); box-shadow:0 4px 14px rgba(0,0,0,.25); opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; }
-  .back-top.show { opacity:1; pointer-events:auto; }
-  .back-top:hover { transform:translateY(-4px); }
-  :focus-visible { outline:2px dashed var(--rust); outline-offset:4px; }
-
-  @media (max-width: 780px) {
-    .site-wrap { width:min(100% - 18px, 620px); margin:9px auto; }
-    .nav { align-items:flex-start; padding:15px 18px; flex-direction:column; gap:8px; }
-    .nav-links { justify-content:flex-start; gap:16px; }
-    .hero { grid-template-columns:1fr; padding:30px 24px 52px; gap:34px; }
-    .photo-frame { max-width:290px; }
-    .hero-copy h1 { font-size:clamp(44px, 12vw, 65px); }
-    .hand-note { bottom:-32px; }
-    .two-col { grid-template-columns:1fr; gap:18px; }
-    .project-grid { grid-template-columns:1fr; }
-    .project-image { height:210px; }
-    .projects-heading { align-items:flex-start; }
+  /* ====== GSAP 级别的滚动动效 ====== */
+  .gsap-reveal {
+    opacity: 0;
+    transform: translateY(60px) scale(0.98);
+    transition: opacity 1.5s cubic-bezier(0.19, 1, 0.22, 1), transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
   }
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { scroll-behavior:auto !important; transition:none !important; animation:none !important; }
-    .reveal { opacity:1; transform:none; }
+  .gsap-reveal.visible { opacity: 1; transform: translateY(0) scale(1); }
+
+  /* 打字机效果 */
+  .type-wrap { 
+    overflow: hidden; display: inline-block; white-space: nowrap;
+    border-right: 2px solid #ff2a7a;
+    animation: typing 2.5s steps(40, end), blink-caret .75s step-end infinite;
+  }
+  @keyframes typing { from { width: 0 } to { width: 100% } }
+  @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #ff2a7a; } }
+
+  @media (max-width: 900px) {
+    .container { padding: 0 1.5rem; }
+    nav { padding: 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding-top: 120px; gap: 3rem; }
+    .hero-visual { height: 50vh; }
+    .experience-item { grid-template-columns: 1fr; gap: 1.5rem; padding: 4rem 0; }
+    .info-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    section { padding: 6rem 0; }
+    .project-card { padding: 2rem; }
   }
 </style>
 </head>
 <body>
-<div class="site-wrap">
-  <nav class="nav paper" aria-label="主导航">
-    <a class="brand" href="#home">MY SCRAPBOOK<small>PORTFOLIO · 2026</small></a>
-    <div class="nav-links">
-      <a href="#home">首页 Home</a><a href="#about">关于 About</a><a href="#skills">技能 Skills</a><a href="#projects">项目 Projects</a><a href="#contact">联系 Contact</a>
+
+<nav>
+  <a href="#" class="logo">胡珺玥</a>
+  <div class="nav-links">
+    <a href="#experience">经历</a>
+    <a href="#projects">项目</a>
+    <a href="#info">关于</a>
+    <a href="mailto:iamlynn83@foxmail.com">联系</a>
+  </div>
+</nav>
+
+<main class="container">
+  <!-- Hero 首屏 -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Hi, I'm <em>胡珺玥</em></h1>
+      <p><span class="type-wrap">计算机科学与技术 · 2027 届毕业生</span><br>数据分析方向 / AI 产品方向。</p>
     </div>
-  </nav>
+    <div class="hero-visual"></div>
+  </section>
 
-  <main>
-    <section class="hero paper torn" id="home">
-      <div class="photo-frame">
-        <span class="tape"></span>
-        <div class="image-fallback" style="display:none;aspect-ratio:4/4.5;">在这里放你的照片<br><small>images/profile.jpg</small></div>
-        <div class="photo-caption">Better Me, Bigger Dreams ?</div>
+  <!-- 实习经历 -->
+  <section id="experience">
+    <span class="section-title gsap-reveal">经历 / Experience</span>
+    
+    <div class="experience-item gsap-reveal">
+      <div class="experience-date">2026.07 – 2026.09</div>
+      <div class="experience-content">
+        <h3>智云数科（北京）</h3>
+        <h4>数据分析实习生（AI 方向）</h4>
+        <ul>
+          <li>独立完成“电商转化漏斗分析智能体”项目：采集并清洗天猫用户行为数据，构建 Neo4j 知识图谱存储用户、商品与行为关系，实现多维度转化漏斗分析。</li>
+          <li>基于 LangGraph 编排“感知—检索—诊断—报告”四色智能体流程：调用通义千问大模型自动定位漏斗断点，输出分析报告与优化建议。</li>
+          <li>开发 Flask 后端 REST 接口与 Vue3 前端可视化界面：实现漏斗转化率、商品 Top、用户分层等指标展示与 AI 报告生成。</li>
+          <li>完成系统测试与部署（Neo4j + Flask + Vite）：核心功能测试全部通过，完整分析流程总耗时 15-20s。</li>
+        </ul>
       </div>
-      <div class="hero-copy">
-        <div class="eyebrow">A little bit about me ?</div>
-        <h1>Hi, I'm <em>胡珺玥</em></h1>
-        <p class="hero-subtitle">广东药科大学 · 计算机科学与技术 · 2027 届毕业生</p>
-        <div class="contact-list">
-          <div><span class="contact-icon">?</span><a href="mailto:iamlynn83@foxmail.com">iamlynn83@foxmail.com</a></div>
-          <div><span class="contact-icon">?</span><a href="tel:17817054226">17817054226</a></div>
-          <div><span class="contact-icon">↗</span><a href="https://github.com/1742520980-creator" target="_blank" rel="noreferrer">GitHub / 作品集</a></div>
-        </div>
-        <div class="hand-note">认真观察，再把想法做出来 ?</div>
-      </div>
-    </section>
-
-    <div class="two-col">
-      <section class="about paper torn reveal" id="about">
-        <span class="tape"></span>
-        <h2 class="section-title"><span class="star">?</span> About Me <span>/ 关于我</span></h2>
-        <p>计算机科学与技术本科。具备数据库、统计学相关基础，熟练使用 SQL、Excel 完成数据提取与清洗，掌握 PowerBI 做数据可视化。</p>
-        <p>熟悉 RAG、AI Agent 实战项目，熟悉知识库构建、提示词工程与大模型效果评估；具备电商业务数据分析实习经验，熟悉指标监控、活动复盘与用户分层分析。</p>
-        <div class="info-list">
-          <div class="info-item"><span class="info-symbol">?</span><div><strong>教育背景</strong>广东药科大学 · 计算机科学与技术<br>本科 · 预计 2027 年毕业</div></div>
-          <div class="info-item"><span class="info-symbol">?</span><div><strong>求职方向</strong>数据分析 / AI 产品方向</div></div>
-          <div class="info-item"><span class="info-symbol">?</span><div><strong>证书</strong>CET-4、CET-6、计算机二级（Python/Office）、普通话二级甲等</div></div>
-        </div>
-      </section>
-
-      <section class="skills paper torn reveal" id="skills">
-        <span class="tape right"></span>
-        <h2 class="section-title">Skills <span>/ 专业技能</span></h2>
-        <div class="skill-group">
-          <div class="skill-icon">&lt;/&gt;</div><div><h3>数据相关</h3><div class="tags"><span class="tag">SQL</span><span class="tag">Excel</span><span class="tag">PowerBI</span><span class="tag">数据清洗</span><span class="tag">数据可视化</span></div></div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-icon">?</div><div><h3>AI 相关</h3><div class="tags"><span class="tag">LangChain</span><span class="tag">RAG 检索增强</span><span class="tag">Prompt 工程</span><span class="tag">大模型效果测试</span></div></div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-icon">?</div><div><h3>其他工具</h3><div class="tags"><span class="tag">Git & GitHub</span><span class="tag">VS Code</span><span class="tag">PPT</span><span class="tag">XMind</span></div></div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-icon">?</div><div><h3>语言能力</h3><div class="tags"><span class="tag">CET-6</span><span class="tag">英语技术文档阅读</span></div></div>
-        </div>
-      </section>
     </div>
 
-    <section class="projects paper torn reveal" id="projects">
-      <span class="tape"></span>
-      <div class="projects-heading">
-        <h2 class="section-title"><span class="star">?</span> Projects <span>/ 项目经历</span></h2>
-        <a class="view-all" href="#contact">Let's connect ↗</a>
+    <div class="experience-item gsap-reveal">
+      <div class="experience-date">2025.06 – 2025.09</div>
+      <div class="experience-content">
+        <h3>广州名创优品</h3>
+        <h4>数据分析实习生</h4>
+        <ul>
+          <li>开展电商业务指标日常监控，通过 SQL 拉取订单、用户、营销活动数据，监测 15+ 核心指标，累计上报 20+ 次指标异常，及时同步业务方处理。</li>
+          <li>参与营销活动效果复盘，完成 12 场营销活动复盘，输出 12 份效果分析报告。</li>
+          <li>利用 Excel 函数、数据透视表结合 Python 实现用户分层分析，处理超 50 万用户样本，区分高价值与流失用户，输出 6 份用户洞察。</li>
+          <li>产出 30+ 份业务周报、月报，制作 100+ 业务图表，向产品、运营同步分析结论；参与优化 8 项统计指标。</li>
+          <li>对接多部门，承接 200+ 次业务取数需求，需求响应及时率 95% 以上。</li>
+        </ul>
       </div>
-      <div class="project-grid">
-        <article class="project-card">
-          <div class="project-image">
-            <img src="images/project-ecommerce.jpg" alt="AI Agent 项目配图" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">
-            <div class="image-fallback" style="display:none;">项目配图 01<br><small>images/project-ecommerce.jpg</small></div>
-          </div>
-          <div class="project-body">
-            <h3>AI-Agent 汽车零件故障智能检索原型</h3>
-            <div class="tags"><span class="tag">RAG</span><span class="tag">AI Agent</span><span class="tag">Python</span></div>
-            <p>基于 RAG 实现汽车零件故障问题检索，输入故障描述，检索私有零件知识库输出维修参考方案。梳理业务需求，完成文档预处理、文本切片，构建向量知识库，完成私有业务资料的接入。</p>
-            <div class="project-meta">2026 · 个人项目</div>
-            <a class="project-link" href="https://github.com/1742520980-creator" target="_blank">查看项目 ↗</a>
-          </div>
-        </article>
-        <article class="project-card">
-          <div class="project-image">
-            <img src="images/project-dashboard.jpg" alt="数据分析项目配图" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">
-            <div class="image-fallback" style="display:none;">项目配图 02<br><small>images/project-dashboard.jpg</small></div>
-          </div>
-          <div class="project-body">
-            <h3>公开数据集电商用户行为数据分析</h3>
-            <div class="tags"><span class="tag">SQL</span><span class="tag">Excel</span><span class="tag">PowerBI</span></div>
-            <p>使用 Kaggle 公开电商数据集做练习，模拟互联网用户业务分析。使用 SQL 完成数据提取、多表关联查询，利用 Excel 完成缺失、异常数据清洗。使用 PowerBI 搭建可视化看板，对用户下单、转化、复购等指标做多维度拆解。</p>
-            <div class="project-meta">2026 · 个人实战项目</div>
-            <a class="project-link" href="https://github.com/1742520980-creator" target="_blank">查看项目 ↗</a>
-          </div>
-        </article>
-        <article class="project-card">
-          <div class="project-image">
-            <img src="images/project-web.jpg" alt="个人网站项目配图" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">
-            <div class="image-fallback" style="display:none;">项目配图 03<br><small>images/project-web.jpg</small></div>
-          </div>
-          <div class="project-body">
-            <h3>个人作品集网站</h3>
-            <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
-            <p>设计并开发复古拼贴风格的个人简历网站，使用响应式布局、卡片悬停动画与滚动渐入效果，展示个人技能和项目经历。部署于 GitHub Pages。</p>
-            <div class="project-meta">2026 · Web 项目</div>
-            <a class="project-link" href="https://1742520980-creator.github.io/my-vibe-portfolio/" target="_blank">查看项目 ↗</a>
-          </div>
-        </article>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer" id="contact">
-    <p class="footer-quote">“The future is yours to make.” ?</p>
-    <div class="footer-links">
-      <a href="mailto:iamlynn83@foxmail.com">Email</a>
-      <a href="https://github.com/1742520980-creator" target="_blank" rel="noreferrer">GitHub</a>
-      <a href="#home">Back to top ↑</a>
     </div>
-  </footer>
-</div>
-<button class="back-top" id="backTop" aria-label="返回顶部" title="返回顶部">↑</button>
+  </section>
+
+  <!-- 项目经历 -->
+  <section id="projects">
+    <span class="section-title gsap-reveal">项目 / Projects</span>
+    <div class="projects-grid">
+      
+      <div class="project-card gsap-reveal">
+        <h3>AI-Agent 汽车零件故障智能检索原型</h3>
+        <p>基于 RAG 实现汽车零件故障问题检索，输入故障描述，检索私有零件知识库输出维修参考方案。梳理业务需求，完成文档预处理、文本切片，构建向量知识库，完成私有业务资料的接入。设计系统提示词，运用 Few-shot 约束大模型输出格式，缓解大模型幻觉问题。设计多组测试用例对 Agent 进行效果验证，评估检索准确率与回答质量，迭代优化检索策略与 Prompt。</p>
+        <div class="project-meta">个人项目 · 2026 · RAG / AI Agent / Python</div>
+      </div>
+
+      <div class="project-card gsap-reveal">
+        <h3>公开数据集电商用户行为数据分析</h3>
+        <p>使用 Kaggle 公开电商数据集做练习，模拟互联网用户业务分析。使用 SQL 完成数据提取、多表关联查询，利用 Excel 完成缺失、异常数据清洗。使用 PowerBI 搭建可视化看板，对用户下单、转化、复购等指标做多维度拆解。基于数据观察总结用户行为特征，输出简单分析结论，练习业务指标分析思路。</p>
+        <div class="project-meta">个人实战项目 · 2026 · SQL / Excel / PowerBI</div>
+      </div>
+
+      <div class="project-card gsap-reveal">
+        <h3>个人作品集网站</h3>
+        <p>设计并开发复古拼贴风格的个人简历网站，使用响应式布局、卡片悬停动画与滚动渐入效果，展示个人技能和项目经历。部署于 GitHub Pages。</p>
+        <div class="project-meta">Web 项目 · 2026 · HTML / CSS / JS</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 信息面板 -->
+  <section id="info">
+    <span class="section-title gsap-reveal">信息 / Info</span>
+    <div class="info-grid gsap-reveal">
+      <div class="info-item">
+        <h4>教育背景</h4>
+        <p>广东药科大学 · 计算机科学与技术<br>本科 · 预计 2027 年毕业</p>
+      </div>
+      <div class="info-item">
+        <h4>证书</h4>
+        <p>CET-4、CET-6<br>计算机二级（Python/Office）<br>普通话二级甲等</p>
+      </div>
+      <div class="info-item">
+        <h4>专业技能</h4>
+        <ul>
+          <li>数据：SQL、Excel、PowerBI</li>
+          <li>AI：LangChain、RAG、Prompt 工程</li>
+          <li>工具：Git & GitHub、VS Code</li>
+        </ul>
+      </div>
+      <div class="info-item">
+        <h4>联系</h4>
+        <p>iamlynn83@foxmail.com<br>17817054226<br>广东省广州市</p>
+      </div>
+    </div>
+  </section>
+</main>
 
 <script>
-  const revealObserver = new IntersectionObserver((entries) => {
+  // 滚动触发 GSAP 级别的“缩放+上浮”动效
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-  const backTop = document.getElementById('backTop');
-  window.addEventListener('scroll', () => {
-    backTop.classList.toggle('show', window.scrollY > 420);
-  }, { passive: true });
-  backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-  document.getElementById('year').textContent = new Date().getFullYear();
+  }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+  document.querySelectorAll('.gsap-reveal').forEach(el => observer.observe(el));
 </script>
+
 </body>
 </html>
