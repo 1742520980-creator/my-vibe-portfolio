@@ -11,22 +11,22 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background-color: #0a0a0a; /* 深黑底色 */
-    color: #eaeaea; /* 浅灰白字体 */
+    background-color: #0a0a0a;
+    color: #eaeaea;
     font-family: 'Inter', -apple-system, sans-serif;
     line-height: 1.8;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
 
-  /* === 核心添加：Joji / The Weeknd 那种胶片颗粒质感 === */
+  /* 胶片颗粒质感 */
   body::after {
     content: "";
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    pointer-events: none; /* 不影响鼠标操作 */
+    pointer-events: none;
     z-index: 9999;
-    opacity: 0.04; /* 极其微弱，但质感瞬间拉满 */
+    opacity: 0.04;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
 
@@ -47,40 +47,27 @@
   .nav-links a { font-size: 0.8rem; font-weight: 400; color: #fff; letter-spacing: 0.08em; opacity: 0.7; }
   .nav-links a:hover { opacity: 1; }
 
-  /* Hero 首屏 */
+  /* Hero 首屏：纯文字排版，无照片 */
   .hero {
     height: 100vh;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
-    padding-top: 100px;
+    display: flex; flex-direction: column; justify-content: center;
+    padding-top: 100px; position: relative;
   }
   .hero-text h1 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-size: clamp(3rem, 7vw, 6rem);
     font-weight: 500; line-height: 1.05; letter-spacing: -0.03em;
     margin-bottom: 2.5rem; color: #ffffff;
   }
-  .hero-text h1 em { font-style: italic; color: #ff2a7a; /* 亮粉色 */ }
-  .hero-text p { font-size: 1rem; color: #888; max-width: 450px; font-weight: 300; }
-  
-  /* 右侧留白/照片区 */
-  .hero-visual {
-    height: 75vh;
-    background-color: #141414;
-    background-image: radial-gradient(circle at 70% 20%, rgba(255, 42, 122, 0.08) 0%, transparent 60%);
-    display: flex; justify-content: center; align-items: center;
-    position: relative; overflow: hidden;
-  }
-  .hero-visual::after {
-    content: 'PORTRAIT / 2026';
-    font-size: 0.7rem; letter-spacing: 0.3em; color: #444; text-transform: uppercase;
-  }
+  .hero-text h1 em { font-style: italic; color: #ff2a7a; }
+  .hero-text p { font-size: 1.1rem; color: #888; max-width: 600px; font-weight: 300; margin-bottom: 0.5rem; }
+  .hero-text .hero-sub { font-size: 0.9rem; color: #555; margin-top: 1.5rem; letter-spacing: 0.05em; }
 
   /* 章节通用 */
   section { padding: 10rem 0; }
   .section-title {
     font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em;
-    color: #ff2a7a; /* 粉色标题 */
-    margin-bottom: 5rem; display: block; font-weight: 500;
+    color: #ff2a7a; margin-bottom: 5rem; display: block; font-weight: 500;
   }
 
   /* 实习经历 */
@@ -117,7 +104,7 @@
   .info-item h4 { font-size: 0.7rem; text-transform: uppercase; color: #ff2a7a; margin-bottom: 1.5rem; letter-spacing: 0.2em; font-weight: 500; }
   .info-item p, .info-item ul { font-size: 0.9rem; color: #888; line-height: 2; list-style: none; }
 
-  /* ====== GSAP 级别的滚动动效 ====== */
+  /* GSAP 级别动效 */
   .gsap-reveal {
     opacity: 0;
     transform: translateY(60px) scale(0.98);
@@ -138,8 +125,7 @@
     .container { padding: 0 1.5rem; }
     nav { padding: 1.5rem; }
     .nav-links { display: none; }
-    .hero { grid-template-columns: 1fr; padding-top: 120px; gap: 3rem; }
-    .hero-visual { height: 50vh; }
+    .hero { padding-top: 100px; }
     .experience-item { grid-template-columns: 1fr; gap: 1.5rem; padding: 4rem 0; }
     .info-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
     section { padding: 6rem 0; }
@@ -160,13 +146,14 @@
 </nav>
 
 <main class="container">
-  <!-- Hero 首屏 -->
+  <!-- Hero 首屏：纯文字 -->
   <section class="hero">
     <div class="hero-text">
       <h1>Hi, I'm <em>胡珺玥</em></h1>
-      <p><span class="type-wrap">计算机科学与技术 · 2027 届毕业生</span><br>数据分析方向 / AI 产品方向。</p>
+      <p><span class="type-wrap">数据分析岗 / AI 产品方向</span></p>
+      <p>计算机科学与技术 · 2027 届毕业生</p>
+      <p class="hero-sub">认真观察，再把想法做出来。</p>
     </div>
-    <div class="hero-visual"></div>
   </section>
 
   <!-- 实习经历 -->
@@ -176,13 +163,12 @@
     <div class="experience-item gsap-reveal">
       <div class="experience-date">2026.07 – 2026.09</div>
       <div class="experience-content">
-        <h3>智云数科（北京）</h3>
+        <h3>智云数科（北京）科技股份有限公司</h3>
         <h4>数据分析实习生（AI 方向）</h4>
         <ul>
-          <li>独立完成“电商转化漏斗分析智能体”项目：采集并清洗天猫用户行为数据，构建 Neo4j 知识图谱存储用户、商品与行为关系，实现多维度转化漏斗分析。</li>
-          <li>基于 LangGraph 编排“感知—检索—诊断—报告”四色智能体流程：调用通义千问大模型自动定位漏斗断点，输出分析报告与优化建议。</li>
-          <li>开发 Flask 后端 REST 接口与 Vue3 前端可视化界面：实现漏斗转化率、商品 Top、用户分层等指标展示与 AI 报告生成。</li>
-          <li>完成系统测试与部署（Neo4j + Flask + Vite）：核心功能测试全部通过，完整分析流程总耗时 15-20s。</li>
+          <li>独立完成“电商转化漏斗分析智能体”项目，采集并清洗天猫用户行为数据，使用 Neo4j 构建用户、商品与行为关系图谱，支持多维转化漏斗分析。</li>
+          <li>基于 LangGraph 编排“感知—检索—诊断—报告”多角色 Agent 工作流，调用通义千问分析漏斗断点，生成分析报告与优化建议。</li>
+          <li>开发 Flask REST API 与 Vue3 可视化界面，展示漏斗转化率、商品 Top、用户分层等指标，并支持 AI 报告生成；完成系统联调部署，核心功能测试通过，完整分析流程耗时约 15-20 秒。</li>
         </ul>
       </div>
     </div>
@@ -190,14 +176,13 @@
     <div class="experience-item gsap-reveal">
       <div class="experience-date">2025.06 – 2025.09</div>
       <div class="experience-content">
-        <h3>广州名创优品</h3>
+        <h3>广州名创优品有限公司</h3>
         <h4>数据分析实习生</h4>
         <ul>
-          <li>开展电商业务指标日常监控，通过 SQL 拉取订单、用户、营销活动数据，监测 15+ 核心指标，累计上报 20+ 次指标异常，及时同步业务方处理。</li>
-          <li>参与营销活动效果复盘，完成 12 场营销活动复盘，输出 12 份效果分析报告。</li>
-          <li>利用 Excel 函数、数据透视表结合 Python 实现用户分层分析，处理超 50 万用户样本，区分高价值与流失用户，输出 6 份用户洞察。</li>
-          <li>产出 30+ 份业务周报、月报，制作 100+ 业务图表，向产品、运营同步分析结论；参与优化 8 项统计指标。</li>
-          <li>对接多部门，承接 200+ 次业务取数需求，需求响应及时率 95% 以上。</li>
+          <li>指标监控：使用 SQL 提取订单、用户及营销活动数据，监测 15+ 项核心业务指标，累计上报 20+ 次指标异常，并及时同步业务方跟进处理。</li>
+          <li>活动复盘：统计营销活动曝光、点击、下单及复购数据，对比活动前后指标变化，完成 12 场营销活动复盘，输出 12 份效果分析报告。</li>
+          <li>用户分析：使用 Excel 函数、数据透视表结合 Python 处理 50 万+ 用户样本，开展用户分层分析，区分高价值与流失用户，输出 6 份用户洞察，为精细化运营提供数据支持。</li>
+          <li>业务分析：产出 30+ 份业务周报、月报，制作 100+ 张业务图表，参与优化 8 项统计指标并统一业务数据口径；承接 200+ 次跨部门取数需求，需求响应及时率达 95% 以上。</li>
         </ul>
       </div>
     </div>
@@ -209,22 +194,22 @@
     <div class="projects-grid">
       
       <div class="project-card gsap-reveal">
+        <h3>电商转化漏斗分析智能体</h3>
+        <p>基于天猫真实用户行为数据（4844 条记录、836 用户、554 商品），构建用户行为知识图谱。搭建浏览→收藏→加购→购买四级转化漏斗，计算各层转化率。发现浏览到加购转化率仅 1.6%，是漏斗最大断点；而加购到购买转化率达 46%，定位问题在“兴趣→意向”环节。从商品、用户、复购三个维度做下钻分析，输出 5 条可落地优化建议。</p>
+        <div class="project-meta">个人项目 · 2026.10 · Neo4j / LangGraph / AI Agent</div>
+      </div>
+
+      <div class="project-card gsap-reveal">
         <h3>AI-Agent 汽车零件故障智能检索原型</h3>
-        <p>基于 RAG 实现汽车零件故障问题检索，输入故障描述，检索私有零件知识库输出维修参考方案。梳理业务需求，完成文档预处理、文本切片，构建向量知识库，完成私有业务资料的接入。设计系统提示词，运用 Few-shot 约束大模型输出格式，缓解大模型幻觉问题。设计多组测试用例对 Agent 进行效果验证，评估检索准确率与回答质量，迭代优化检索策略与 Prompt。</p>
-        <div class="project-meta">个人项目 · 2026 · RAG / AI Agent / Python</div>
+        <p>基于 RAG 搭建汽车零件故障检索原型，完成业务文档预处理、文本切片与知识库接入，实现根据故障描述检索相关维修资料。设计系统提示词并引入 Few-shot 示例，约束模型输出格式；构建测试用例验证检索相关性与回答质量，迭代优化 Prompt 和检索策略。跑通“用户提问—向量化—知识库检索—大模型生成”链路，能够理解并调试核心流程。</p>
+        <div class="project-meta">个人项目 · 2026 · RAG / Prompt 工程 / Python</div>
       </div>
 
       <div class="project-card gsap-reveal">
-        <h3>公开数据集电商用户行为数据分析</h3>
-        <p>使用 Kaggle 公开电商数据集做练习，模拟互联网用户业务分析。使用 SQL 完成数据提取、多表关联查询，利用 Excel 完成缺失、异常数据清洗。使用 PowerBI 搭建可视化看板，对用户下单、转化、复购等指标做多维度拆解。基于数据观察总结用户行为特征，输出简单分析结论，练习业务指标分析思路。</p>
-        <div class="project-meta">个人实战项目 · 2026 · SQL / Excel / PowerBI</div>
+        <h3>个人作品集网站</h3>
+        <p>独立设计并开发暗黑电影感个人简历网站，运用 GSAP 级滚动动效与响应式布局，打造沉浸式视觉体验。基于 Git 进行版本管理，通过 GitHub Pages 完成自动化部署与上线。使用 Cursor + Claude Code 辅助开发，从需求拆解到上线完整走通 AI 编程流程。</p>
+        <div class="project-meta">Web 项目 · 2026.10 · HTML / CSS / JS / AI 编程</div>
       </div>
-
-      <div class="project-card gsap-reveal">
-  <h3>个人作品集网站</h3>
-  <p>独立设计并开发暗黑电影感个人简历网站，运用 GSAP 级滚动动效与响应式布局，打造沉浸式视觉体验。基于 Git 进行版本管理，通过 GitHub Pages 实现自动化部署与上线。</p>
-  <div class="project-meta">Web 项目 · 2026 · HTML / CSS / JS</div>
-</div>
 
     </div>
   </section>
@@ -244,9 +229,10 @@
       <div class="info-item">
         <h4>专业技能</h4>
         <ul>
-          <li>数据：SQL、Excel、PowerBI</li>
-          <li>AI：LangChain、RAG、Prompt 工程</li>
-          <li>工具：Git & GitHub、VS Code</li>
+          <li>数据：SQL、Excel、Power BI</li>
+          <li>AI：LangChain、LangGraph、RAG、Prompt 工程</li>
+          <li>开发：Git、GitHub、VS Code、Flask、Vue3</li>
+          <li>AI 工具：Cursor、Claude Code</li>
         </ul>
       </div>
       <div class="info-item">
@@ -258,7 +244,6 @@
 </main>
 
 <script>
-  // 滚动触发 GSAP 级别的“缩放+上浮”动效
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
